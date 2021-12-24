@@ -4,6 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ExampleModule } from './example/example.module';
+import { ExampleItemModule } from './example-item/example-item.module';
 import config from './mikro-orm.config';
 
 @Module({
@@ -13,6 +14,7 @@ import config from './mikro-orm.config';
       isGlobal: true,
     }),
     ExampleModule,
+    ExampleItemModule,
   ],
   controllers: [AppController],
   providers: [AppService],

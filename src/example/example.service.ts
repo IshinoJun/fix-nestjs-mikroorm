@@ -1,6 +1,7 @@
 import { InjectRepository } from '@mikro-orm/nestjs';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { EntityRepository, wrap } from 'mikro-orm';
+import { ExampleItem } from '../example-item/example-item.entity';
 import { CreateExampleRequestDto } from './dto/create-example-request.dto';
 import { CreateExampleResponseDto } from './dto/create-example-response.dto';
 import { GetExampleResponseDto } from './dto/get-example-response.dto';
@@ -19,6 +20,10 @@ export class ExampleService {
     const { name } = dto;
     const example = new Example();
     example.name = name;
+    const exampleItem = new ExampleItem();
+    exampleItem.name = 'example';
+    example.exampleItems.add(exampleItem);
+
     await this.exampleRepository.persistAndFlush(example);
     return new CreateExampleResponseDto(example);
   }
